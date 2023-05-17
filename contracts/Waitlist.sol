@@ -40,15 +40,21 @@ contract Waitlist is Initializable, OwnableUpgradeable, PausableUpgradeable {
         uint256 amount
     );
 
-    function initialize(uint256 _registrationFee, uint256 _refundTimeSpan)
-        public
-        initializer
-    {
+    function initialize(
+        uint256 _registrationFee,
+        uint256 _refundTimeSpan,
+        bytes32[] memory initDiscountCodes,
+        uint256[] memory initDiscountPercentages,
+        address[] memory users
+    ) public initializer {
         __Ownable_init();
         __Pausable_init();
 
         registrationFee = _registrationFee;
         refundTimeSpan = _refundTimeSpan;
+
+        batchAddDiscountCodes(initDiscountCodes, initDiscountPercentages);
+        batchRegisterUsers(users);
     }
 
     function register(bytes32 discountCode) public payable whenNotPaused {
@@ -77,7 +83,7 @@ contract Waitlist is Initializable, OwnableUpgradeable, PausableUpgradeable {
         returns (uint256)
     {
         uint256 discountPercentage = discountCodes[discountCode];
-        return (registrationFee * (100 - discountPercentage)) / 100;
+        return (registrationFee * (10000 - discountPercentage)) / 10000;
     }
 
     function addDiscountCode(bytes32 discountCode, uint256 discountPercentage)
@@ -85,11 +91,25 @@ contract Waitlist is Initializable, OwnableUpgradeable, PausableUpgradeable {
         onlyOwner
     {
         require(
-            discountPercentage > 0 && discountPercentage < 100,
-            "Discount percentage must be between 0 and 100"
+            discountPercentage > 0 && discountPercentage < 10000,
+            "Discount percentage must be between 0 and 10000"
         );
         discountCodes[discountCode] = discountPercentage;
         emit DiscountCodeAdded(discountCode, discountPercentage);
+    }
+
+    function batchAddDiscountCodes(
+        bytes32[] memory codes,
+        uint256[] memory percentages
+    ) public onlyOwner {
+        require(
+            codes.length == percentages.length,
+            "Mismatch in array lengths"
+        );
+
+        for (uint256 i = 0; i < codes.length; i++) {
+            addDiscountCode(codes[i], percentages[i]);
+        }
     }
 
     function removeDiscountCode(bytes32 discountCode) public onlyOwner {

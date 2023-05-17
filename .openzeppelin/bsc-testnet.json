@@ -1,0 +1,208 @@
+{
+  "manifestVersion": "3.2",
+  "admin": {
+    "address": "0xB337562657D7a4d883ECE62f5eE3117B218e709E",
+    "txHash": "0xd01d02340e46fe336a6fd6c54b343d3d213a167b239f51d89d0b0d2ae13b4b27"
+  },
+  "proxies": [
+    {
+      "address": "0x7F27F66C06FF94162fA60BA9b0caB9FB8Ec2828a",
+      "txHash": "0xe0034cd8885b5990066b5c1f8b19ec79429217023f154150a9d056ff6b50e2f0",
+      "kind": "transparent"
+    }
+  ],
+  "impls": {
+    "073365081d9c4d081babff848f72834ff2535a273f4f82092c6839276953d3bf": {
+      "address": "0x4c0BAF56616ad06c60Df8A317A948bD097eBbFe3",
+      "txHash": "0x566d58ebfcc844386f7bb32beae0f9c32dfc6fe4373f248775c5ec2f9491d0e6",
+      "layout": {
+        "solcVersion": "0.8.18",
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint8",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:62",
+            "retypedFrom": "bool"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:67"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ContextUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:36"
+          },
+          {
+            "label": "_owner",
+            "offset": 0,
+            "slot": "51",
+            "type": "t_address",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:22"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "52",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:94"
+          },
+          {
+            "label": "_paused",
+            "offset": 0,
+            "slot": "101",
+            "type": "t_bool",
+            "contract": "PausableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol:29"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "102",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "PausableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol:116"
+          },
+          {
+            "label": "waitlist",
+            "offset": 0,
+            "slot": "151",
+            "type": "t_mapping(t_address,t_bool)",
+            "contract": "Waitlist",
+            "src": "contracts/Waitlist.sol:10"
+          },
+          {
+            "label": "registrationDates",
+            "offset": 0,
+            "slot": "152",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "Waitlist",
+            "src": "contracts/Waitlist.sol:11"
+          },
+          {
+            "label": "paidRegistrationFees",
+            "offset": 0,
+            "slot": "153",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "Waitlist",
+            "src": "contracts/Waitlist.sol:12"
+          },
+          {
+            "label": "indexedWaitlist",
+            "offset": 0,
+            "slot": "154",
+            "type": "t_mapping(t_uint256,t_address)",
+            "contract": "Waitlist",
+            "src": "contracts/Waitlist.sol:13"
+          },
+          {
+            "label": "discountCodes",
+            "offset": 0,
+            "slot": "155",
+            "type": "t_mapping(t_bytes32,t_uint256)",
+            "contract": "Waitlist",
+            "src": "contracts/Waitlist.sol:14"
+          },
+          {
+            "label": "refundExceptions",
+            "offset": 0,
+            "slot": "156",
+            "type": "t_mapping(t_address,t_bool)",
+            "contract": "Waitlist",
+            "src": "contracts/Waitlist.sol:15"
+          },
+          {
+            "label": "blacklist",
+            "offset": 0,
+            "slot": "157",
+            "type": "t_mapping(t_address,t_bool)",
+            "contract": "Waitlist",
+            "src": "contracts/Waitlist.sol:16"
+          },
+          {
+            "label": "waitlistLength",
+            "offset": 0,
+            "slot": "158",
+            "type": "t_uint256",
+            "contract": "Waitlist",
+            "src": "contracts/Waitlist.sol:17"
+          },
+          {
+            "label": "registrationFee",
+            "offset": 0,
+            "slot": "159",
+            "type": "t_uint256",
+            "contract": "Waitlist",
+            "src": "contracts/Waitlist.sol:18"
+          },
+          {
+            "label": "refundTimeSpan",
+            "offset": 0,
+            "slot": "160",
+            "type": "t_uint256",
+            "contract": "Waitlist",
+            "src": "contracts/Waitlist.sol:19"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]",
+            "numberOfBytes": "1568"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]",
+            "numberOfBytes": "1600"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_bytes32,t_uint256)": {
+            "label": "mapping(bytes32 => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_address)": {
+            "label": "mapping(uint256 => address)",
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint8": {
+            "label": "uint8",
+            "numberOfBytes": "1"
+          }
+        }
+      }
+    }
+  }
+}
