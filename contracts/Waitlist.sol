@@ -12,13 +12,14 @@ contract Waitlist is Initializable, OwnableUpgradeable, PausableUpgradeable {
     mapping(address => uint256) public paidRegistrationFees;
     mapping(uint256 => address) public indexedWaitlist;
     mapping(bytes32 => uint256) public discountCodes;
+    bytes32[] public discountCodeKeys;
     mapping(address => bool) public refundExceptions;
     mapping(address => bool) public blacklist;
     uint256 public waitlistLength;
     uint256 public registrationFee;
     uint256 public refundTimeSpan;
 
-    event UserRegistered(address indexed user, uint256 waitlistIndex);
+    event UserRegistered(address indexed user, uint256 waitlistIndex, bytes32 discountCode);
     event UserAddedByOwner(address indexed user, uint256 waitlistIndex);
     event UserRemovedByOwner(address indexed user);
     event AccessGranted(address indexed user);
@@ -74,7 +75,7 @@ contract Waitlist is Initializable, OwnableUpgradeable, PausableUpgradeable {
         registrationDates[msg.sender] = block.timestamp;
         paidRegistrationFees[msg.sender] = msg.value;
 
-        emit UserRegistered(msg.sender, waitlistLength - 1);
+        emit UserRegistered(msg.sender, waitlistLength - 1, discountCode);
     }
 
     function getDiscountedRegistrationFee(bytes32 discountCode)
@@ -95,6 +96,7 @@ contract Waitlist is Initializable, OwnableUpgradeable, PausableUpgradeable {
             "Discount percentage must be between 0 and 10000"
         );
         discountCodes[discountCode] = discountPercentage;
+        discountCodeKeys.push(discountCode);
         emit DiscountCodeAdded(discountCode, discountPercentage);
     }
 
@@ -112,12 +114,22 @@ contract Waitlist is Initializable, OwnableUpgradeable, PausableUpgradeable {
         }
     }
 
+    // avoid using one of the 2 functions:
+    // either removeDiscountCode or uniformizeDiscounts
     function removeDiscountCode(bytes32 discountCode) public onlyOwner {
         require(discountCodes[discountCode] > 0, "Discount code not found");
         delete discountCodes[discountCode];
         emit DiscountCodeRemoved(discountCode);
     }
 
+    // Beware when using this function!
+    // Removed discounts codes are re-added after this
+    // and they need to be re-deleted manually 
+    function uniformizeDiscounts(uint256 uniformPercentage) public onlyOwner {
+        for (uint256 i = 0; i < discountCodeKeys.length; i++) {
+            discountCodes[discountCodeKeys[i]] = uniformPercentage;
+        }
+    }
     function claimRefund() public {
         require(isEligibleForRefund(msg.sender), "Refund is not available");
 
